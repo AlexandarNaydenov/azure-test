@@ -5,37 +5,16 @@ pool:
   name: 'Default'
 
 variables:
-  goVersion: '1.17'
+  name: 'Mr. Clean'
 
 jobs:
-- job: TestWithGo
-  displayName: 'Test with Go'
+- job: HelloUser
+  displayName: 'Say hello to the user'
   steps:
   - bash: |
-      echo 'Installing Go'
-      curl -O https://dl.google.com/go/go$(goVersion).linux-amd64.tar.gz
-      tar -C /usr/local -xzf go$(goVersion).linux-amd64.tar.gz
-      rm go$(goVersion).linux-amd64.tar.gz
-      echo 'Go Installed'
-    displayName: 'Install Go'
-
+      echo 'Hello there, $(name)'
+    displayName: 'Say Hello'
+  
   - bash: |
-      echo 'Testing Go installation'
-      go version
-    displayName: 'Test Go Installation'
-
-  - bash: |
-      echo 'Creating a simple Go script'
-      mkdir hello
-      cd hello
-      echo 'package main' > main.go
-      echo 'import "fmt"' >> main.go
-      echo 'func main() { fmt.Println("Hello, self-hosted Docker agent!") }' >> main.go
-      echo 'Go script created'
-    displayName: 'Create Go Script'
-
-  - bash: |
-      echo 'Running the Go script'
-      cd hello
-      go run main.go
-    displayName: 'Run Go Script'
+      curl 'https://google.com'
+    displayName: 'Curl that google'
