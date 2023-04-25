@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: mydockeragent
+  name: Default
 
 jobs:
 - job: HelloWorld
