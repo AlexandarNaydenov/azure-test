@@ -7,42 +7,44 @@ pool:
 variables:
   goVersion: '1.17'
 
-steps:
-- script: |
-    echo 'Installing Go'
-    curl -O https://dl.google.com/go/go$(goVersion).linux-amd64.tar.gz
-    tar -C /usr/local -xzf go$(goVersion).linux-amd64.tar.gz
-    rm go$(goVersion).linux-amd64.tar.gz
-    echo 'Go Installed'
-  displayName: 'Install Go'
+jobs:
+- job: TestWithGo
+  displayName: 'Test with Go'
+  steps:
+  - bash: |
+      echo 'Installing Go'
+      curl -O https://dl.google.com/go/go$(goVersion).linux-amd64.tar.gz
+      tar -C /usr/local -xzf go$(goVersion).linux-amd64.tar.gz
+      rm go$(goVersion).linux-amd64.tar.gz
+      echo 'Go Installed'
+    displayName: 'Install Go'
 
-- script: |
-    echo 'Setting up Go environment'
-    echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
-    echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
-    echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.bashrc
-    source ~/.bashrc
-    echo 'Go environment set up'
-  displayName: 'Setup Go Environment'
+  - bash: |
+      echo 'Setting up Go environment'
+      echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
+      echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
+      echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.bashrc
+      source ~/.bashrc
+      echo 'Go environment set up'
+    displayName: 'Setup Go Environment'
 
-- script: |
-    echo 'Testing Go installation'
-    go version
-    go env
-  displayName: 'Test Go Installation'
+  - bash: |
+      echo 'Testing Go installation'
+      go version
+    displayName: 'Test Go Installation'
 
-- script: |
-    echo 'Creating a simple Go script'
-    mkdir -p hello
-    cd hello
-    echo 'package main' > main.go
-    echo 'import "fmt"' >> main.go
-    echo 'func main() { fmt.Println("Hello, self-hosted Docker agent!") }' >> main.go
-    echo 'Go script created'
-  displayName: 'Create Go Script'
+  - bash: |
+      echo 'Creating a simple Go script'
+      mkdir hello
+      cd hello
+      echo 'package main' > main.go
+      echo 'import "fmt"' >> main.go
+      echo 'func main() { fmt.Println("Hello, self-hosted Docker agent!") }' >> main.go
+      echo 'Go script created'
+    displayName: 'Create Go Script'
 
-- script: |
-    echo 'Running the Go script'
-    cd hello
-    go run main.go
-  displayName: 'Run Go Script'
+  - bash: |
+      echo 'Running the Go script'
+      cd hello
+      go run main.go
+    displayName: 'Run Go Script'
