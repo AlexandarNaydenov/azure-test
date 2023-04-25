@@ -1,7 +1,9 @@
-pool:
-  name: 'Default'
+trigger:
+- main
 
-container: ubuntu:18.04
+pool:
+  name: "Default"
 
 steps:
-- script: 'echo "Hello There!"'
+- script: echo "Hello World"
+  displayName: 'Hello World'
