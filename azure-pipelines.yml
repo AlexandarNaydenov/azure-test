@@ -20,15 +20,6 @@ jobs:
     displayName: 'Install Go'
 
   - bash: |
-      echo 'Setting up Go environment'
-      echo 'export GOROOT=/usr/local/go' >> ~/.bashrc
-      echo 'export GOPATH=$(go env GOPATH)' >> ~/.bashrc
-      echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.bashrc
-      source ~/.bashrc
-      echo 'Go environment set up'
-    displayName: 'Setup Go Environment'
-
-  - bash: |
       echo 'Testing Go installation'
       go version
     displayName: 'Test Go Installation'
