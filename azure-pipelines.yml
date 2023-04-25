@@ -5,5 +5,5 @@ pool:
   name: "Default"
 
 steps:
-- script: echo "Hello World"
-  displayName: 'Hello World'
+- script: cat /tmp/sashko-file.txt
+  displayName: 'cat something'
