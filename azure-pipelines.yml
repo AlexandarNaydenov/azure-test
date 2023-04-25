@@ -16,5 +16,5 @@ jobs:
     displayName: 'Say Hello'
   
   - bash: |
-      curl 'https://google.com'
+      curl 'https://www.google.com/'
     displayName: 'Curl that google'
