@@ -1,12 +1,7 @@
-trigger:
-- main
-
 pool:
-  name: Default
+  name: 'Default'
 
-jobs:
-- job: HelloWorld
-  container:
-    image: ubuntu:latest
-  steps:
-  - script: echo "Hello, world!"
+container: ubuntu:18.04
+
+steps:
+- script: 'echo "Hello There!"'
